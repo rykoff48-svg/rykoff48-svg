@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Скриншоты</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: #FFFFFF;
+            color: #0F1419;
+            margin: 0;
+            padding: 0;
+            line-height: 1.4;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+        }
+
+        .logo img{
+            width: 150px;
+        }
+
+        nav a {
+            color: #657786;
+            text-decoration: none;
+            margin-left: 15px;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        main {
+            padding: 20px 0;
+        }
+
+        h1 {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .add-button {
+            background-color: #1DA1F2;
+            color: #FFFFFF;
+            border: none;
+            border-radius: 9999px;
+            padding: 8px 16px;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+            float: right;
+        }
+
+        .grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            clear: both;
+            padding-top: 20px;
+        }
+
+        .card {
+            background-color: #FFFFFF;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
+            width: 275px;
+            flex: 0 0 275px;
+        }
+
+        .card img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+        }
+
+        .card p {
+            padding: 10px;
+            font-size: 13px;
+            color: #657786;
+            margin: 0;
+            text-align: left;
+        }
+
+        .show-more {
+            display: block;
+            margin: 40px auto 0;
+            background-color: #FFFFFF;
+            color: #1DA1F2;
+            border: 1px solid #1DA1F2;
+            border-radius: 9999px;
+            padding: 10px 20px;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+            width: 200px;
+            text-align: center;
+        }
+
+        footer {
+            display: flex;
+            justify-content: space-between;
+            padding: 40px 0 20px;
+            font-size: 13px;
+        }
+
+        footer .email {
+            color: #1DA1F2;
+        }
+
+        footer .info {
+            color: #657786;
+        }
+
+        /* Modal styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.4);
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 10% auto;
+            padding: 20px;
+            border-radius: 12px;
+            width: 400px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .tabs button {
+            background: none;
+            border: none;
+            font-size: 24px;
+            font-weight: bold;
+            color: #0F1419;
+            cursor: pointer;
+            padding: 0 10px;
+        }
+
+        .tabs button.active {
+            color: #1DA1F2;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        form label {
+            display: block;
+            font-size: 14px;
+            color: #657786;
+            margin-bottom: 5px;
+        }
+
+        form input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #CCD6DD;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        .form-row {
+            display: flex;
+            gap: 10px;
+        }
+
+        .form-row .form-group {
+            flex: 1;
+        }
+
+        .checkbox {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .checkbox input {
+            width: auto;
+            margin-right: 10px;
+        }
+
+        .submit-button {
+            width: 100%;
+            background-color: #1DA1F2;
+            color: #FFFFFF;
+            border: none;
+            border-radius: 9999px;
+            padding: 12px;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .required-note {
+            font-size: 12px;
+            color: #657786;
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        /* 📗 Планшеты (3 колонки) */
+        @media (max-width: 900px) and (min-width: 500px) {
+            .modal-content {
+                width: 60%;
+                
+            }
+            
+        }
+
+        /* 📱 Телефоны (2 колонки, форма в одну колонну) */
+        @media (max-width: 500px) {
+            header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .add-button {
+                float: none;
+                width: 100%;
+                margin-top: 10px;
+            }
+
+            footer {
+                flex-direction: column;
+                text-align: center;
+                gap: 10px;
+            }
+
+            .modal-content {
+                width: 85%;
+                margin-left: 10px auto;
+                margin-right: 10px auto;
+            }
+
+            .form-row {
+                flex-direction: column;
+            }
+
+            nav {
+                width: 100%;
+                display: flex;
+                justify-content: space-around;
+                margin-top: 10px;
+            }
+
+            .tabs button {
+                font-size: 1rem;
+            }
+
+            .logo img{
+                width: 100px;
+                
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <img src="Image/logo.png">
+            </div>
+            <nav>
+                <a onclick="openModal('register')">Регистрация</a>
+                <a onclick="openModal('login')">Вход</a>
+            </nav>
+        </header>
+        <main>
+            <h1>Июль, 2022</h1>
+            <a href="now.html"><button class="add-button" >+ Добавить скриншот</button></a>
+            <div class="grid">
+                <div class="card">
+                    <a href="Dop.html"><img src="Image/Card.png" alt="Desert"></a>
+                    <p>Добавлено 15 августа</p>
+                </div>
+                <div class="card">
+                    <a href="Dop.html"><img src="Image/img copy.png" alt="Fluid Art"></a>
+                    <p>Добавлено 15 августа</p>
+                </div>
+                <div class="card">
+                    <a href="Dop.html"><img src="Image/Card (1).png" alt="Van Gogh"></a>
+                    <p>Добавлено 15 августа</p>
+                </div>
+                <div class="card">
+                    <a href="Dop.html"><img src="Image/Card (2).png" alt="Marble"></a>
+                    <p>Добавлено 15 августа</p>
+                </div>
+                <div class="card">
+                    <a href="Dop.html"><img src="Image/Card (3).png" alt="Statue"></a>
+                    <p>Добавлено 15 августа</p>
+                </div>
+                <div class="card">
+                    <a href="Dop.html"><img src="Image/Card (4).png" alt="Face Painting"></a>
+                    <p>Добавлено 15 августа</p>
+                </div>
+                <div class="card">
+                    <a href="Dop.html"><img src="Image/Card (5).png" alt="Color Swatches"></a>
+                    <p>Добавлено 15 августа</p>
+                </div>
+                <div class="card">
+                    <a href="Dop.html"><img src="Image/Card (6).png" alt="Pencils"></a>
+                    <p>Добавлено 15 августа</p>
+                </div>
+                <div class="card">
+                    <a href="Dop.html"><img src="Image/Card (7).png" alt="Castle"></a>
+                    <p>Добавлено 15 августа</p>
+                </div>
+                <div class="card">
+                    <a href="Dop.html"><img src="Image/Card (8).png" alt="Flowers"></a>
+                    <p>Добавлено 15 августа</p>
+                </div>
+                <div class="card">
+                    <a href="Dop.html"><img src="Image/Card (9).png" alt="Geometric Face"></a>
+                    <p>Добавлено 15 августа</p>
+                </div>
+                <div class="card">
+                    <a href="Dop.html"><img src="Image/Card (10).png" alt="Color Bars"></a>
+                    <p>Добавлено 15 августа</p>
+                </div>
+            </div>
+            <button class="show-more">Показать еще</button>
+        </main>
+        <footer>
+            <p class="email">info@gmail.com</p>
+            <p class="info">Информация о разработчике</p>
+        </footer>
+    </div>
+
+    <!-- Modal -->
+    <div id="authModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <div class="tabs">
+                <button id="regTab" onclick="switchTab('register')">Регистрация</button>
+                <button id="logTab" onclick="switchTab('login')">Авторизация</button>
+            </div>
+            <div id="register" class="tab-content">
+                <form>
+                    <div class="form-group">
+                        <label>Ваше имя</label>
+                        <input type="text" placeholder="Константин">
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Email</label>
+                            <input type="email" placeholder="info@gmail.com">
+                        </div>
+                        <div class="form-group">
+                            <label>Мобильный телефон</label>
+                            <input type="tel" placeholder="8 910 123 34 45">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Пароль</label>
+                            <input type="password">
+                        </div>
+                        <div class="form-group">
+                            <label>Повторите пароль</label>
+                            <input type="password">
+                        </div>
+                    </div>
+                    <div class="checkbox">
+                        <input type="checkbox" id="agree">
+                        <label for="agree">Согласен на обработку персональных данных</label>
+                    </div>
+                    <button type="submit" class="submit-button">Зарегистрироваться</button>
+                    <p class="required-note">○ Все поля обязательны для заполнения</p>
+                </form>
+            </div>
+            <div id="login" class="tab-content">
+                <form>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Email</label>
+                            <input type="email" placeholder="info@gmail.com">
+                        </div>
+                        <div class="form-group">
+                            <label>Пароль</label>
+                            <input type="password">
+                        </div>
+                    </div>
+                    <button type="submit" class="submit-button">Войти</button>
+                    <p class="required-note">○ Все поля обязательны для заполнения</p>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function openModal(tab) {
+            document.getElementById('authModal').style.display = 'block';
+            switchTab(tab);
+        }
+
+        function closeModal() {
+            document.getElementById('authModal').style.display = 'none';
+        }
+
+        function switchTab(tab) {
+            var register = document.getElementById('register');
+            var login = document.getElementById('login');
+            var regTab = document.getElementById('regTab');
+            var logTab = document.getElementById('logTab');
+
+            if (tab === 'register') {
+                register.classList.add('active');
+                login.classList.remove('active');
+                regTab.classList.add('active');
+                logTab.classList.remove('active');
+            } else {
+                register.classList.remove('active');
+                login.classList.add('active');
+                regTab.classList.remove('active');
+                logTab.classList.add('active');
+            }
+        }
+
+        window.onclick = function(event) {
+            var modal = document.getElementById('authModal');
+            if (event.target == modal) {
+                closeModal();
+            }
+        }
+    </script>
+</body>
+</html>

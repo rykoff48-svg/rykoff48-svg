@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Скриншот</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: #FFFFFF;
+            color: #0F1419;
+            margin: 0;
+            padding: 0;
+            line-height: 1.4;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+        }
+
+        
+
+        .logo img{
+            width: 150px;
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+        }
+
+        nav span {
+            color: #657786;
+            font-size: 14px;
+            margin-right: 15px;
+        }
+
+        nav a {
+            color: #657786;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        main {
+            padding: 20px 0;
+        }
+
+        .date-added {
+            font-size: 14px;
+            color: #657786;
+            margin-bottom: 10px;
+        }
+
+        .actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .copy-button {
+            background-color: #1DA1F2;
+            color: #FFFFFF;
+            border: none;
+            border-radius: 9999px;
+            padding: 8px 16px;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+        }
+
+        .copy-button::before {
+            content: '📋';
+            margin-right: 5px;
+        }
+
+        .back-button {
+            background-color: #FFFFFF;
+            color: #1DA1F2;
+            border: 1px solid #1DA1F2;
+            border-radius: 9999px;
+            padding: 8px 16px;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .large-image {
+            width: 100%;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
+        }
+
+        .large-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .toast {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) scale(0.9);
+        background: #fff;
+        color: #0F1419;
+        border-radius: 16px;
+        box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+        padding: 30px 40px;
+        text-align: center;
+        opacity: 0;
+        transition: all 0.3s ease;
+        z-index: 1000;
+    }
+
+    .toast.show {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+    }
+
+    .toast .checkmark {
+        font-size: 32px;
+        color: #1DA1F2;
+        display: block;
+        margin-bottom: 10px;
+    }
+
+    .toast p {
+        margin: 0;
+        font-size: 16px;
+    }
+
+    /* 📗 Планшеты */
+    @media (max-width: 900px) and (min-width: 500px) {
+        
+    }
+
+    /* 📱 Телефоны */
+    @media (max-width: 500px) {
+        header {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        nav {
+            width: 100%;
+            display: flex;
+            justify-content: space-around;
+            margin-top: 10px;
+        }
+
+        .actions {
+            flex-direction: column-reverse;
+            align-items: stretch;
+            gap: 10px;
+        }
+
+        .copy-button, .back-button {
+            width: 100%;
+            justify-content: center;
+        }
+
+        .copy-button::before {
+            margin-right: 5px;
+        }
+
+        .logo img {
+            width: 100px;
+        }
+    }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <img src="Image/logo.png">
+            </div>
+            <nav>
+                <span>Здравствуйте, Константин</span>
+                <a href="index.html">Выход</a>
+            </nav>
+        </header>
+        <main>
+            <div class="date-added">Добавлено 11 августа</div>
+            <div class="actions">
+                <button onclick="showToast()" class="copy-button">Скопировать ссылку</button>
+                <a href="index.html" class="back-button">&lt; Назад</a>
+            </div>
+            <div class="large-image">
+                <img src="Image/img.png" alt="Desert">
+            </div>
+        </main>
+    </div>
+
+    <div id="toast" class="toast">
+        <div class="checkmark">✔</div>
+        <p>Ссылка скопирована</p>
+    </div>
+
+    <script>
+    function showToast() {
+        const toast = document.getElementById("toast");
+        toast.classList.add("show");
+        setTimeout(() => toast.classList.remove("show"), 2000); // скрыть через 2 сек
+    }
+    </script>
+</body>
+</html>
